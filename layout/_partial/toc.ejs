@@ -1,0 +1,65 @@
+<!-- <div class="post-toc-wrap">
+    <div class="post-toc">
+        <%- toc(
+                page.content,
+                {
+                    class: 'nav',
+                    list_number: theme.toc.number || false
+                }
+        ) %>
+    </div>
+</div> -->
+
+<div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="joe_aside_post">
+        <!-- 目录 -->
+        <div class="toc-container" style="display: block;">
+            <h3 class="toc-header"><i class="joe-font joe-icon-xiaoxi" title="文章目录"></i>文章目录</h3>
+            <%- toc(
+                    page.content,
+                    {
+                        class: 'nav',
+                        list_number: theme.toc.number || false
+                    }
+            ) %>
+        </div>
+        <!--相关文章 分类-->
+        <section class="joe_aside__item newest">
+          <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-huo"></i>
+            <span class="text">相关文章</span>
+          </div>
+          <div class="joe_aside__item-contain">
+            <ul class="list">
+                <% page.categories.forEach(category_item=>{ %>
+                    <% category_item.posts.forEach((post_item, index=0)=>{ %>
+                        <% if(page.title!=post_item.title&&index++<=8){ %>
+                            <li class="item">
+                                <a class="link"  href="<%- url_for(post_item.path) %>"><%- post_item.title %></a><i class="joe-font joe-icon-link"></i>
+                            </li>
+                        <% } %>
+                    <% }) %>
+                <% }) %>
+            </ul>
+          </div>
+        </section>
+        <!-- 云标签 -->
+        <section class="joe_aside__item tags-cloud">
+            <div class="joe_aside__item-title">
+                <i class="joe-font joe-icon-tag"></i>
+                <span class="text">标签云</span>
+                <a class="tags_more" href="/tags">更多<i class="joe-font joe-icon-more-right"></i></a>
+            </div>
+            <div class="joe_aside__item-contain">
+                <div class="tags-cloud-list responsive">
+                        <% if (site.tags.length) { %>
+                            <%- tagcloud() %>
+                        <% } %>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+</div>
+

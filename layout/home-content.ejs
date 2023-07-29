@@ -1,0 +1,58 @@
+<div class="joe_index__hot">
+    <div class="joe_index__title">
+      <ul class="joe_index__title-title default">
+        <li class="item active" data-type="created">精品分类</li>
+      </ul>
+      <div class="joe_index__title-notice">
+        <a href="/categories/"  rel="noopener noreferrer nofollow"><i class="joe-font joe-icon-application"></i>更多分类</a>
+      </div>
+    </div>
+    <ul class="joe_index__hot-list hotlist">
+        <% site.categories.forEach((post,i) => { %>
+            <% if (i<4) { %>
+                <li class="item animated fadeIn">
+                    <a class="link" href="<%- post.path %>"  title="<%= post.title %>">
+                        <div class="inner">
+                            <img width="100%" height="120" class="image ls-is-cached lazyloaded" data-src="/images/categories/<%= post.name %>.jpg"
+                                src="/images/categories/<%= post.name %>.jpg" onerror="this.src='/images/error/error.jpg'" alt="<%= post.name %>">
+                                <span class="title"><%= post.name %></span>
+                        </div>
+                    </a>
+                </li>
+            <% } %>
+        <% }) %>
+    </ul>
+  </div>
+
+<div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        <% page.posts.forEach(post => { %>
+            <li class="home-article-item">
+
+                <% if (post.sticky) { %>
+                    <i class="fas fa-thumbtack top-icon"></i>
+                <% } %>
+
+                <h3 class="home-article-title">
+                    <a href="<%- url_for(post.path) %>">
+                        <%= post.title %>
+                    </a>
+                </h3>
+                <a class="read-more" href="<%- url_for(post.path) %>">
+                    <div class="home-article-content keep-markdown-body">
+                        <% if (post.excerpt) { %>
+                            <%- post.excerpt %>
+                        <% } else { %>
+                            <%- truncate(strip_html(post.content), {length: 128}) %>
+                        <% } %>
+                    </div>
+                </a>
+                <%- partial('_partial/home-article-meta-info', {post: post}) %>
+            </li>
+        <% }) %>
+    </ul>
+
+    <div class="home-paginator">
+        <%- partial('_partial/paginator', {pageObject: page}) %>
+    </div>
+</div>

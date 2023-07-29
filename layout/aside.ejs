@@ -1,0 +1,120 @@
+<aside class="joe_aside pos_left">
+    <!-- 博主信息 -->
+    <section class="joe_aside__item author">
+        <img width="100%" height="120" class="image ls-is-cached lazyloaded"
+            data-src="/images/bg.jpg"
+            src="/images/bg.jpg" onerror="Joe.errorImg(this)" alt="博主栏壁纸">
+        <div class="user">
+            <div class="avatar_wrapper circle">
+                <img class="avatar ls-is-cached lazyloaded"
+                    data-src="/images/avatar.png"
+                    src="/images/avatar.png"
+                    onerror="Joe.errorImg(this)" alt="博主头像">
+            </div>
+            <a class="link" href="https://jhxie.com" target="_blank" rel="noopener noreferrer nofollow"><%= theme.base_info.author || config.author %>
+            </a>
+            <p class="motto joe_motto">长大是人必经的溃烂</p>
+        </div>
+        <div class="count">
+            <div class="item" title="分类数">
+                <span class="num"><a href="/categories"><%- site.categories.length %></a></span>
+                <span>分类数</span>
+            </div>
+            <div class="item" title="文章数">
+                <span class="num"><a href="/archives"><%- site.posts.length %></a></span>
+                <span>文章数</span>
+            </div>
+            <div class="item" title="标签数">
+                <span class="num"><a href="/tags"><%= site.tags.length %></a></span>
+                <span>标签数</span>
+            </div>
+        </div>
+        <div class="social-account">
+
+        <%
+        const { description: fs_description, hitokoto: fs_hitokoto } = theme.style.first_screen
+        const { description: c_description } = config
+        let final_description = fs_description || c_description || ''
+        final_description = final_description.split('||').map(desc => desc.trim())
+        if (final_description.length > 2) { final_description.length = 2 }
+        const { enable: sc_enable, links: sc_links } = theme.social_contact
+        %>
+            <div class="social-content-center">
+                <% if (sc_enable) { %>
+                    <div class="s-icon-list">
+                        <% for (const key in sc_links) { %>
+                            <% if(sc_links[key]) { %>
+                                <%
+                                    const tmpl = sc_links[key].split('|').map(x => x.trim())
+                                    let isImg = false
+                                    let link = sc_links[key]
+                                    if (tmpl.length > 1) {
+                                        link = tmpl[1]
+                                        isImg = tmpl[0] === 'img'
+                                    }
+                                %>
+                                <div class="tooltip s-icon-item <%= isImg ? 'tooltip-img clear' : ''%>"
+                                        data-content="<%= __(key) %>"
+                                        data-name="<%= key %>"
+                                        <%= isImg ? 'data-img-url='+ link +'' : '' %>
+                                >
+                                    <% if(key === 'email') { %>
+                                        <a href="mailto:<%- link %>">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+                                    <% } else { %>
+                                        <% if(isImg) { %>
+                                            <i class="fab fa-<%= key %>"></i>
+                                        <% } else { %>
+                                            <a target="_blank" href="<%- link %>">
+                                                <i class="fab fa-<%= key %>"></i>
+                                            </a>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <!-- 近期文章 -->
+    <section class="joe_aside__item newest">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-huo"></i>
+            <span class="text">近期文章</span>
+        </div>
+        <div class="joe_aside__item-contain">
+            <ul class="list">
+                <% site.posts.sort('date', 'desc' ).limit(12).each(function(post){ var _tags={}; var tags=[]; for(var key in
+                    post.tags.data) { var name=post.tags.data[key].name; if(!_tags[name]) { _tags[name]=1; } }
+                    tags=Object.keys(_tags); var isTanslation=tags.indexOf('译文')> -1;
+                    %>
+                    <li class="item"><a class="link" href="<%- url_for(post.path) %>" itemprop="url" itemprop="name">
+                            <% if(isTanslation) { %>[译] <% } %><%- post.title %>
+                                        <% if(0 && post.mark) { %>
+                                            <em tabindex="0" aria-hidden="true" class="entry-item-tag"><%- post.mark %></em>
+                                            <% } %>
+                        </a><i class="joe-font joe-icon-link"></i>
+                    <% }) %>
+                    <% if(site.posts.length> 125) {%><li><a href="<%- url_for("/archives/") %>">所有文章 » </a></li><% } %>
+            </ul>
+        </div>
+    </section>
+    <!-- 云标签 -->
+    <section class="joe_aside__item tags-cloud">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-tag"></i>
+            <span class="text">标签云</span>
+            <a class="tags_more" href="/tags">更多<i class="joe-font joe-icon-more-right"></i></a>
+        </div>
+        <div class="joe_aside__item-contain">
+            <div class="tags-cloud-list responsive">
+                    <% if (site.tags.length) { %>
+                        <%- tagcloud() %>
+                    <% } %>
+            </div>
+        </div>
+    </section>
+</aside>

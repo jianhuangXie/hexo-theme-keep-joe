@@ -1,0 +1,37 @@
+<div class="fade-in-down-animation">
+    <div class="category-list-container">
+        <div class="category-list-content">
+            <!-- <%- list_categories(site.categories, { class: 'all-category' }) %> -->
+            <div class="joe_index">
+                <div class="joe_index__title">
+                    <ul class="joe_index__title-title pl-15">
+                        <li class="item active">全部分类<span class="totals"><%= site.categories.length %></span></li>
+                    </ul>
+                </div>
+                <div class="joe_index__hot categories">
+                    <ul class="joe_index__hot-list animated fadeIn">
+                        <% site.categories.forEach(post => { %>
+                            <li class="item">
+                                <a class="link" href="/<%= post.path %>" title="<%= post.title %>">
+                                    <div class="inner">
+                                        <em class="post-nums"><%= post.posts.length %>篇</em>
+                                        <img width="100%" height="120" class="image ls-is-cached lazyloaded"
+                                            data-src="/images/categories/<%= post.name %>.jpg"
+                                            src="/images/categories/<%= post.name %>.jpg"
+                                            onerror="this.src='/images/error/error.jpg'" alt="<%= post.name %>">
+                                        <figcaption class="title"><%= post.name %></figcaption>
+                                    </div>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="category-comments">
+            <% if (page.comment) { %>
+                <%- partial('_partial/comment/comment') %>
+                    <% } %>
+        </div>
+    </div>
+</div>

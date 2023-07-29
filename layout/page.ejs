@@ -1,0 +1,101 @@
+<%- partial('_partial/progress-bar') %>
+<main class="page-container">
+
+    <% if (theme.style.first_screen?.enable === true && is_home() && !page.prev) { %>
+        <%- partial('_partial/first-screen') %>
+    <% } %>
+
+    <div class="page-main-content<%= is_home() ? ' is-home' : '' %>">
+
+        <div class="page-main-content-top">
+            <%- partial('_partial/header') %>
+        </div>
+        <!-- 页面内容-->
+        <div class="page-main-content-middle">
+            <div class="main-content">
+                <% if (is_home()) { %>
+                    <%- partial('banner') %>
+                    <%- partial('home-content') %>
+
+                <% } else if (is_archive()) { %>
+                    <%- partial('archive-content') %>
+
+                <% } else if (is_post()) { %>
+                    <%- partial('article-content') %>
+
+                <% } else if (is_category()) { %>
+                    <%- partial('category-content') %>
+
+                <% } else if (is_tag()) { %>
+                    <%- partial('tag-content') %>
+
+                <% } else if (page.title === 'category' || page.title === 'categories') { %>
+                    <%- partial('category-list') %>
+
+                <% } else if (page.title === 'tag' || page.title === 'tags') { %>
+                    <%- partial('_partial/tagcloud') %>
+
+                <% } else { %>
+                    <%- partial('_partial/page-template') %>
+
+                <% } %>
+            </div>
+
+            <!-- 初始化页面 判断是哪个模块-->
+            <div>
+                <% if (is_home()) { %>
+                    <!-- 主页面-->
+                    <script> console.log("is_home");</script>
+                    <%- partial('aside') %>
+                <% } else if (is_archive()) { %>
+                    <!-- 归档 -->
+                    <script> console.log("is_archive");</script>
+                <% } else if (is_post()) { %>
+                    <!-- 文章页面 -->
+                    <script> console.log("is_post");</script>
+                <% } else if (is_category()) { %>
+                    <script> console.log("is_category");</script>
+
+                <% } else if (is_tag()) { %>
+                    <script> console.log("is_tag");</script>
+
+                <% } else if (page.title === 'category' || page.title === 'categories') { %>
+                    <script> console.log("<%- page.title === 'category' || page.title === 'categories' %>");</script>
+
+                <% } else if (page.title === 'tag' || page.title === 'tags') { %>
+                    <script> console.log("page.title === 'tag' || page.title === 'tags'");</script>
+
+                <% } else { %>
+                    <script> console.log("else");</script>
+
+                <% } %>
+                
+
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <%- partial('_partial/footer') %>
+        </div>
+    </div>
+
+    <% if (is_post()) { %>
+        <div class="post-tools">
+            <%- partial('_partial/post-tools') %>
+        </div>
+    <% } %>
+    <!--右下角按钮-->
+    <div class="right-bottom-side-tools">
+        <%- partial('_partial/side-tools') %>
+    </div>
+
+    <%- partial('_partial/image-viewer') %>
+
+    <% if (theme.local_search?.enable) { %>
+        <%- partial('_partial/local-search') %>
+    <% } %>
+
+</main>
+
+

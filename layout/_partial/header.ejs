@@ -1,0 +1,136 @@
+<%
+const { title: bi_title, logo_img: bi_logo_img } = theme.base_info
+const { logo: s_logo, first_screen: s_first_screen } = theme.style
+const { enable: s_fs_enable, header_transparent: s_fs_header_transparent } = s_first_screen
+const { title: config_title } = config
+const { enable: local_search_enable } = theme.local_search
+%>
+<header class="header-wrapper<%= s_fs_enable === true && is_home() && s_fs_header_transparent ? ' transparent-1' : '' %>">
+
+    <div class="header-content<%- (s_fs_enable === true && is_home() && !page.prev) ? ' has-first-screen' : '' %>">
+        <div class="left">
+            <% if (s_logo || bi_logo_img) { %>
+                <a class="logo-image" href="/">
+                    <%- image_tag(s_logo || bi_logo_img) %>
+                </a>
+            <% } %>
+            <a class="logo-title" href="/">
+               <%= bi_title || config_title || 'Keep Theme' %>
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc joe_header__above-nav">
+                <ul class="menu-list ">
+                    <% for (var i in theme.menu) { %>
+                        <% if (theme.menu[i].name) { %>
+                            <li class="menu-item joe_dropdown">
+                                    <% if (theme.menu[i].icon) { %>
+                                        <a class="joe_dropdown__link" ><%= i %><i class="joe-font joe-icon-arrow-down"></i></a>
+                                        <ul class="joe_dropdown__menu " style="top: 45px;">
+                                            <% for (var s in theme.menu[i].name) { %>
+                                                <li class="joe_nav_sub-li">
+                                                    <a class="item" target="_self" title="<%= s %>" href="<%- theme.menu[i].name[s].url ? url_for(theme.menu[i].name[s].url) : url_for(theme.menu[i].name[s]) %>">
+                                                        <%= s %>
+                                                    </a>
+                                                </li>
+                                            <% }  %>
+                                        </ul>
+                                    <% } else { %>
+                                        <a href="<%- theme.menu[i].url %>"><%= i %></a>
+                                    <% } %>
+                            </li>
+                        <% } else { %>
+                            <li class="menu-item">
+                                <a class="<%- isInHomePaging(page.path, theme.menu[i]) ? 'active' : is_current(theme.menu[i]) ? 'active' : '' %>"
+                                   href="<%- url_for(theme.menu[i]) %>"
+                                >
+                                    <%= __(i.toLowerCase()).toUpperCase() %>
+                                </a>
+                            </li>
+                        <% } %>
+
+                    <% } %>
+                    <% if (local_search_enable === true) { %>
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="mobile">
+                <% if (local_search_enable === true) { %>
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                <% } %>
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer joe_header__above-nav">
+        <ul class="drawer-menu-list">
+            <% for (var i in theme.menu) { %>
+                    <% if (theme.menu[i].name) { %>
+                        <li class="menu-item joe_dropdown">
+                                <% if (theme.menu[i].icon) { %>
+                                    <a class="joe_dropdown__link" ><%= i %><i class="joe-font joe-icon-arrow-down"></i></a>
+                                    <ul class="joe_dropdown__menu " style="top: 25px;">
+                                        <% for (var s in theme.menu[i].name) { %>
+                                            <li class="joe_nav_sub-li">
+                                                <a class="item" target="_self" title="<%= s %>" href="<%- theme.menu[i].name[s].url ? url_for(theme.menu[i].name[s].url) : url_for(theme.menu[i].name[s]) %>">
+                                                    <%= s %>
+                                                </a>
+                                            </li>
+                                        <% }  %>
+                                    </ul>
+                                <% } else { %>
+                                    <a href="<%- theme.menu[i].url %>"><%= i %></a>
+                                <% } %>
+                        </li>
+                        
+                    <% } else { %>
+                    <li class="drawer-menu-item flex-center">
+                        <a class="<%- isInHomePaging(page.path, theme.menu[i]) ? 'active' : is_current(theme.menu[i]) ? 'active' : '' %>"
+                           href="<%- url_for(theme.menu[i]) %>"><%= __(i.toLowerCase()).toUpperCase() %></a>
+                    </li>
+                <% } %>
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+<script>
+    dropDown();
+    function dropDown(){
+        var div = document.getElementsByClassName("joe_dropdown");
+        // 获取3个嵌套的div元素
+        for (var i = 0; i < div.length; i++) {    // 遍历嵌套的div元素
+            div[i].onmouseover = function (e) {   // 注册移过事件处理函数
+                if (this.classList.contains('active')) {
+                    this.classList.remove("active");
+                } else {
+                    this.classList.add("active");
+                }
+            }
+            div[i].onmouseout = function (e) {   // 注册移出事件处理函数
+                if (this.classList.contains('active')) {
+                    this.classList.remove("active");
+                } else {
+                    this.classList.add("active");
+                }
+            }
+            div[i].addEventListener('click', function (e) {
+                if (this.classList.contains('active')) {
+                    this.classList.remove("active");
+                } else {
+                    this.classList.add("active");
+                }
+            });
+        }
+    }
+    window.addEventListener('pjax:success', dropDown);//pjax 加载html 需要重新渲染 js
+</script>

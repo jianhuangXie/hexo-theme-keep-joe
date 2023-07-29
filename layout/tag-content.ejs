@@ -1,0 +1,41 @@
+<div class="fade-in-down-animation">
+    <div class="tag-container">
+            <div class="tag-name">
+              <i class="fas fa-tag"></i>&nbsp;以下是
+              <span class="muted ellipsis"><%= page.tag %></span>
+              <span>相关的文章</span>
+            </div>
+        <!-- <div class="tag-post-list">
+            <%- partial('_partial/archive-list', {posts_new: page.posts}) %>
+        </div> -->
+        <div class="tag-content-container">
+            <ul class="tag-article-list">
+                <% page.posts.forEach(post => { %>
+                    <li class="tag-article-item">
+                        <% if (post.sticky) { %>
+                            <i class="fas fa-thumbtack top-icon"></i>
+                        <% } %>
+                        <h3 class="tag-article-title">
+                            <a href="<%- url_for(post.path) %>">
+                                <%= post.title %>
+                            </a>
+                        </h3>
+                        <a class="read-more" href="<%- url_for(post.path) %>">
+                            <div class="tag-article-content keep-markdown-body">
+                                <% if (post.excerpt) { %>
+                                    <%- post.excerpt %>
+                                <% } else { %>
+                                    <%- truncate(strip_html(post.content), {length: 128}) %>
+                                <% } %>
+                            </div>
+                        </a>
+                        <%- partial('_partial/home-article-meta-info', {post: post}) %>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+    <div class="tag-paginator">
+        <%- partial('_partial/paginator', {pageObject: page}) %>
+    </div>
+</div>
