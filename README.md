@@ -1,11 +1,4 @@
----
-title: 基于keep主题修改hexo框架主题keep-joe
-date: 2023-07-29 22:58:26
-tags:
- - keep-joe    
- - hexo主题
-categories: Hexo
----
+
 ### 说明
 当前博客是通过 [Hexo](https://hexo.io/)框架基于[keep主题](https://keep-docs.xpoet.cn/)搭建而成。
 但是有些功能和样式有缺，所以参考了halo框架的[joe主题](https://github.com/qinhua/halo-theme-joe2.0)修改了字体页面样式和功能。
