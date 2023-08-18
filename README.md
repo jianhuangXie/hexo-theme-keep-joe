@@ -17,12 +17,12 @@
 
 ### 预览
 
-<img src="https://jhxie.com/hexo/Hexo%E6%A1%86%E6%9E%B6%E5%9F%BA%E4%BA%8Ekeep%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98keep-joe/set1.jpg" alt="hexo-theme-keep-joe">
+<img src="https://jhxie.com/hexo/Hexo%E6%A1%86%E6%9E%B6%E5%9F%BA%E4%BA%8Ekeep%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98keep-joe/set1.jpg" alt="hexo-theme-keep-joe"> </br>
 www.jhxie.com
 
 ### 下载使用
 主题下载地址：[https://github.com/jianhuangXie/hexo-theme-keep-joe](https://github.com/jianhuangXie/hexo-theme-keep-joe)
 
 以下项目提供地址：
-[keep主题](https://keep-docs.xpoet.cn/)
+[keep主题](https://keep-docs.xpoet.cn/)</br>
 [joe主题](https://github.com/qinhua/halo-theme-joe2.0)
