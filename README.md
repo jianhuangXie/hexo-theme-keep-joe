@@ -17,8 +17,8 @@
 
 ### 预览
 
-<img src="https://jhxie.com/hexo/Hexo%E6%A1%86%E6%9E%B6%E5%9F%BA%E4%BA%8Ekeep%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98keep-joe/set1.jpg" style="width:6vw;min-width:90px;" alt="hexo-theme-keep-joe">
-[wwww.jhxie.com](www.jhxie.com)
+<img src="https://jhxie.com/hexo/Hexo%E6%A1%86%E6%9E%B6%E5%9F%BA%E4%BA%8Ekeep%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98keep-joe/set1.jpg" alt="hexo-theme-keep-joe">
+www.jhxie.com
 
 ### 下载使用
 主题下载地址：[https://github.com/jianhuangXie/hexo-theme-keep-joe](https://github.com/jianhuangXie/hexo-theme-keep-joe)
